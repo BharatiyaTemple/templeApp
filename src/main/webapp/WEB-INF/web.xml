@@ -12,13 +12,23 @@
     </description>
 
     <servlet>
-        <servlet-name>MainServlet</servlet-name>
-        <servlet-class>Main</servlet-class>
+        <servlet-name>Main</servlet-name>
+        <servlet-class>com.mbcc.templeapp.servlet.VisitorController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>MainServlet</servlet-name>
+        <servlet-name>Main</servlet-name>
         <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DB</servlet-name>
+        <servlet-class>com.mbcc.templeapp.servlet.DBServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DB</servlet-name>
+        <url-pattern>/initDB</url-pattern>
     </servlet-mapping>
 
 </web-app>
