@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<script>
+html =$.parseHTML(decodeURI("&amp;nbsp;&amp;nbsp;&lt;a href=&quot; http://bit.ly/bt-navaratna&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;font-size: 18pt;&quot;&gt;Sponsor online here&lt;/span&gt;&lt;/a&gt;&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;div&gt;Dhwajastambha literally means flag pole. It is made of wood, cladded with brass / copper sheet. The top portion of the flag staff has three horizontal perches or three branches pointing towards the sanctum. It symbolizes righteousness, reputation and propriety &amp;amp; the Trimurtis  Vishnu, Brahma and Shiva. The very Holy Dhwajastambha is believed to carry the power of God in the temple. It is considered to be a spiritual connector between us earthlings, and the Supreme Being, God.&lt;/div&gt;\r\n&lt;div&gt;&lt;br /&gt;\r\n&lt;/div&gt;\r\n&lt;div&gt;On &lt;span style=&quot;color: #ff6666; font-weight: bold;&quot;&gt;Saturday, May 14th 2016&lt;/span&gt;, there is a divine opportunity of placing one or more navaratnas (nine gems) representing 9 planets that form the foundation of the temple Dhwajastambha and Garuda that will stand for several generations!&amp;nbsp;&lt;/div&gt;\r\n&lt;div&gt;&lt;br /&gt;\r\n&lt;/div&gt;\r\n&lt;div&gt;Event Date &amp;nbsp; : Saturday, May 14th, 2016&lt;/div&gt;\r\n&lt;div&gt;&lt;br /&gt;\r\n&lt;/div&gt;\r\n&lt;div&gt;Time &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; : 08:00am - 12:00pm&lt;/div&gt;\r\n&lt;div&gt;&lt;br /&gt;\r\n&lt;/div&gt;\r\n&lt;div&gt;Sponsorship : $51 per one set of Navaratna&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;p id=&quot;yui_3_16_0_ym19_1_1461885368263_70112&quot; style=&quot;-webkit-padding-start: 0px; margin: 0px; padding: 0px; color: #000000; font-family: calibri, arial, helvetica, sans-serif; font-size: 16px;&quot;&gt;Anand &amp;nbsp;Varadarajan &amp;nbsp;&amp;nbsp;&lt;span id=&quot;gc-number-1&quot; class=&quot;gc-cs-link&quot; title=&quot;Call with Google Voice&quot; style=&quot;-webkit-padding-start: 0px; color: #0033bb; text-decoration: underline; cursor: pointer;&quot;&gt;248-767-2655&lt;/span&gt;&lt;/p&gt;\r\n&lt;p id=&quot;yui_3_16_0_ym19_1_1461885368263_70093&quot; style=&quot;-webkit-padding-start: 0px; margin: 0px; padding: 0px; color: #000000; font-family: calibri, arial, helvetica, sans-serif; font-size: 16px;&quot;&gt;Shama Kenkre &amp;nbsp;&lt;span id=&quot;gc-number-2&quot; class=&quot;gc-cs-link&quot; title=&quot;Call with Google Voice&quot; style=&quot;-webkit-padding-start: 0px; color: #0033bb; text-decoration: underline; cursor: pointer;&quot;&gt;248-250-4931&lt;/span&gt;&lt;/p&gt;\r\n&lt;p id=&quot;yui_3_16_0_ym19_1_1461885368263_70056&quot; style=&quot;-webkit-padding-start: 0px; margin: 0px; padding: 0px; color: #000000; font-family: calibri, arial, helvetica, sans-serif; font-size: 16px;&quot;&gt;Venkata Paruchuri &amp;nbsp;&lt;span id=&quot;gc-number-3&quot; class=&quot;gc-cs-link&quot; title=&quot;Call with Google Voice&quot; style=&quot;-webkit-padding-start: 0px; color: #0033bb; text-decoration: underline; cursor: pointer;&quot;&gt;313-805-0964&lt;/span&gt;&lt;/p&gt;\r\n&lt;p id=&quot;yui_3_16_0_ym19_1_1461885368263_70087&quot; style=&quot;-webkit-padding-start: 0px; margin: 0px; padding: 0px; color: #000000; font-family: calibri, arial, helvetica, sans-serif; font-size: 16px;&quot;&gt;Temple Office &amp;nbsp;&lt;span id=&quot;gc-number-4&quot; class=&quot;gc-cs-link&quot; title=&quot;Call with Google Voice&quot; style=&quot;-webkit-padding-start: 0px; color: #0033bb; text-decoration: underline; cursor: pointer;&quot;&gt;248-879-2552&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;"));
+//Gather the parsed HTML's node names
+$.each( html, function( i, el ) {
+  /* nodeNames[ i ] = "<li>" + el.nodeName + "</li>"; */
+  console.log(el.nodeName);
+});
+  
+document.body.innerHTML = html[0].innerHTML;
+</script>
+
+</body>
+</html>
