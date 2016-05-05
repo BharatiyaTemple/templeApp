@@ -9,7 +9,7 @@
 <title>Temple WS Soap Client</title>
 <link rel="stylesheet" href="css/formstyle1.css" type="text/css">
 <!-- Ref: http://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_lists_avatar -->
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="css/w3.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>

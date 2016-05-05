@@ -18,7 +18,7 @@
 
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
-        <url-pattern>/index.html</url-pattern>
+        <url-pattern>/welcome</url-pattern>
     </servlet-mapping>
     
     <servlet>

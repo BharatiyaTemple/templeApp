@@ -54,7 +54,7 @@ public class TempleEventsServlet extends HttpServlet {
 //		}		
 //		request.setAttribute("jsonresult", jsonStr);//if you want to return a json String
 		request.setAttribute("result", events);
-		getServletContext().getRequestDispatcher("/sampleActiveEventsSoapProxy/Demo.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/demo.jsp").forward(request, response);
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
