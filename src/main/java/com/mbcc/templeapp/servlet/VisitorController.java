@@ -1,8 +1,6 @@
 package com.mbcc.templeapp.servlet;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -51,6 +49,15 @@ public class VisitorController extends HttpServlet {
 			
 			if(method.equalsIgnoreCase("list")){
 				List<Visitor> existingVisitors = VisitorDao.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
+				Gson gson = new Gson();
+				response.setContentType("text/x-json;charset=UTF-8");           
+		        response.setHeader("Cache-Control", "no-cache");
+				response.getWriter().append(gson.toJson(existingVisitors));
+				return;
+			}
+			
+			if(method.equalsIgnoreCase("listAll")){
+				List<Visitor> existingVisitors = VisitorDao.retrieveAllVisitors();
 				Gson gson = new Gson();
 				response.setContentType("text/x-json;charset=UTF-8");           
 		        response.setHeader("Cache-Control", "no-cache");
