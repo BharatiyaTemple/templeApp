@@ -96,7 +96,7 @@ public class VisitorDao {
 	public static void initializeDatabase() throws SQLException, URISyntaxException {
 		Statement stmt = getConnection().createStatement();
 
-		String dropVisitorLog = "DROP TABLE VisitorLog IF EXISTS";
+		String dropVisitorLog = "DROP TABLE IF EXISTS VisitorLog";
 		stmt.executeUpdate(dropVisitorLog);
 		
 		String visitorLog = "CREATE TABLE VisitorLog " + "(id SERIAL, " + " first VARCHAR(255), "
@@ -104,7 +104,7 @@ public class VisitorDao {
 
 		stmt.executeUpdate(visitorLog);
 		
-		String dropVisitor = "DROP TABLE Visitor IF EXISTS";
+		String dropVisitor = "DROP TABLE IF EXISTS Visitor";
 		stmt.executeUpdate(dropVisitor);
 
 		String visitors = "CREATE TABLE Visitor " + "(id SERIAL, " + " phone VARCHAR(8),"

@@ -5,15 +5,88 @@
 <title>Bharatiya Temple Library</title>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+	crossorigin="anonymous">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    var selectedUser;
+    function initUserTable(){
+    	var table = document.getElementById("usersTable");
+		document.getElementById("usersTableBody").innerHTML="";
+    }
+    
+    function signup() {
+
+    	$.ajax({url: "welcome?method=insert?phoneNumber="+$('#phoneNumber').val()+"&firstName="+$('#firstName').val()+"&lastName="+$('#lastName').val()+ "&member="+$('#member').val(), success: function(result){
+    		$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
+    		$("#signup")[0].reset();
+    		$('#modal-login').modal('hide');
+    	}});
+      
+      return false;
+     }
+    
+	function insertLog(){
+		
+		$.ajax({url: "welcome?method=insertLog?phoneNumber="+selectedUser.phoneNumber+"&firstName="+selectedUser.firstName+"&lastName="+selectedUser.lastName, success: function(result){
+			initUserTable();
+			$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
+	    }});
+		return false;
+	}
+	function getList() {
+		var phone = $("#list-phoneNumber").val();
+		$.ajax({
+					url : "welcome?method=list&phoneNumber=" + phone,
+					success : function(result) {
+						console.log(result);
+						if (result == "Logged user") {
+							initUserTable();
+							$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
+						} else {
+							
+							if(result.length==0){
+								$('#modal-login').modal('show');
+								return;
+							}
+							
+							var table = document.getElementById("usersTable");
+							document.getElementById("usersTableBody").innerHTML="";
+							for (var i = 0; i < result.length; i++) {
+								var row = table.insertRow(0);
+								var firstNameCell = row.insertCell(0);
+								var lastNameCell = row.insertCell(1);
+								var selection = row.insertCell(2);
+								firstNameCell.innerHTML = result[i].firstName;
+								lastNameCell.innerHTML = result[i].lastName;
+								selectedUser = result[i];
+								var htmlString = "<button style='color:black' onclick='insertLog()'>Sign me in</button>";
+								selection.innerHTML=htmlString;
+							}
+						}
+					}
+				});
+
+		return false;
+	}
+</script>
 </head>
 <body>
 
@@ -21,90 +94,103 @@
 	<div class="top-content">
 
 		<font color="white">
-		<div class="inner-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 text">
-						<h1>
-							<strong>Bharatiya</strong> Community Library
-						</h1>
-						<div class="description">
-							<p>
-								Welcome to the Bharatiya Community Library. If you are not
-								already a member, <strong>sign up here</strong>.
-							</p>
-							<div class="top-big-link">
-								<a class="btn btn-link-1 launch-modal" href="#"
-									data-modal-id="modal-login">Sign Up</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<div class="form-top">
-							<div class="form-top-left">
-								<h3>Login to our site</h3>
-								<p>Enter your phone number to log on:</p>
-							</div>
-							<div class="form-top-right">
-								<i class="fa fa-lock"></i>
-							</div>
-						</div>
-						<div class="form-bottom">
-							
-							<!-- This is the login with phone number form -->
-							<form role="form" action="LoginServlets" method="post" class="login-form">
-								<div class="form-group">
-									<label class="sr-only" for="form-phoneNumber">Phone
-										Number</label> <input type="text" name="form-phoneNumber"
-										placeholder="Phone Number..."
-										class="form-username form-control" id="form-username">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 text">
+							<h1>
+								<strong>Bharatiya</strong> Community Library
+							</h1>
+							<div class="description">
+								<p>
+									Welcome to the Bharatiya Community Library. If you are not
+									already a member, <strong>sign up here</strong>.
+								</p>
+								<div class="top-big-link">
+									<a class="btn btn-link-1 launch-modal" href="#"
+										data-modal-id="modal-login">Sign Up</a>
 								</div>
-
-								<button type="submit" class="btn">Sign in!</button>
-							
-							
-							</form>
+							</div>
 						</div>
-			</font>			
-						  <!-- MODAL -->
-        <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
-        	<div class="modal-dialog">
-        		<div class="modal-content">
-        			
-        			<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal">
-        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-        				</button>
-        				<h3 class="modal-title" id="modal-login-label">Become a member to our site</h3>
-        				<p>Enter your name and phone number below:</p>
-        			</div>
-        			
-        			<div class="modal-body">
-        				
-	                    <form role="form" action="welcome" method="post" class="login-form">
-	                    	<div class="form-group">
-	                        	<input type="text" name="firstName" placeholder="First Name..." class="form-username form-control" id="form-username">
-	                        </div>
-	                        <div class="form-group">
-	                        	<input type="text" name="lastName" placeholder="Last Name..." class="form-username form-control" id="form-username">
-	                        </div>
-	                        <div class="form-group">
-	                        	<input type="text" name="phoneNumber" placeholder="Phone Number..." class="form-username form-control" id="form-username">
-	                        </div>
-	                        <input type="hidden" name="method" value="insert">
-	                        
-	                        <button type="submit" class="btn">Sign up!</button>
-	                    </form>
-	                    
-        			</div>
-						
 					</div>
-				</div>
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3 form-box">
+							<div class="form-top">
+								<div class="form-top-left">
+									<h3>Log your visit to our library</h3>
+									<p>Please enter your phone number:</p>
+								</div>
+								<div class="form-top-right">
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+							<div class="form-bottom">
 
+								<!-- This is the login with phone number form -->
+								<form role="form" onsubmit="return getList()" class="login-form">
+									<div class="form-group">
+										<label class="sr-only" for="form-phoneNumber">Phone
+											Number</label> <input type="text" name="list-phoneNumber"
+											id="list-phoneNumber" placeholder="Phone Number..."
+											class="form-username form-control" id="form-username">
+									</div>
+									
+									<button type="submit" style="color:black">Sign in!</button>
+								</form>
+								<div id="list">
+										<table id="usersTable" class="table table-bordered" >
+										<tbody id="usersTableBody"></tbody>
+										</table>
+								</div>
+								<div id="messageDisplay"></div>
+							</div>
+		</font>
+		<!-- MODAL -->
+		<div class="modal fade" id="modal-login" tabindex="-1" role="dialog"
+			aria-labelledby="modal-login-label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h3 class="modal-title" id="modal-login-label">Welcome to our library</h3>
+						<p>Enter your name and phone number below:</p>
+					</div>
+
+					<div class="modal-body">
+
+						<form role="form" onsubmit="return signup()" id="signup" class="login-form">
+							<div class="form-group">
+								<input type="text" name="firstName" placeholder="First Name..."
+									class="form-username form-control" id="form-username">
+							</div>
+							<div class="form-group">
+								<input type="text" name="lastName" placeholder="Last Name..."
+									class="form-username form-control" id="form-username">
+							</div>
+							<div class="form-group">
+								<input type="text" name="phoneNumber"
+									placeholder="Phone Number..."
+									class="form-username form-control" id="form-username">
+							</div>
+							<div class="form-group">
+								<select class="selectpicker">
+  									<option value="false">Non Member</option>
+  									<option value="true">Temple Member</option>
+								</select>
+							</div>
+							<input type="hidden" name="method" value="insert">
+
+							<button type="submit" class="btn">Sign up!</button>
+						</form>
+
+					</div>
+
+				</div>
 			</div>
+
 		</div>
+	</div>
 	</div>
 
 	</div>
@@ -113,8 +199,8 @@
 	<!-- Javascript -->
 	<script src="js/jquery.backstretch.min.js"></script>
 	<script src="js/scripts.js"></script>
-	
-    <script src="js/popScripts.js"></script>
+
+	<script src="js/popScripts.js"></script>
 
 </body>
 </html>

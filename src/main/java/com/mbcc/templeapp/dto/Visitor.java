@@ -7,7 +7,16 @@ public class Visitor {
 	private String phoneNumber;
 	private boolean member;
 	
+	public Visitor(){
+		
+	}
 	
+	public Visitor(String firstName, String lastName, String phoneNumber, boolean member) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.member = member;
+	}
 	public boolean isMember() {
 		return member;
 	}

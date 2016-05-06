@@ -1,6 +1,8 @@
 package com.mbcc.templeapp.servlet;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,23 +38,31 @@ public class VisitorController extends HttpServlet {
 
 		try {
 			if (method.equalsIgnoreCase("insert")) {
-				Visitor visitor = new Visitor();
-				visitor.setPhoneNumber(request.getParameter("phoneNumber"));
-				visitor.setFirstName(request.getParameter("firstName"));
-				visitor.setLastName(request.getParameter("lastName"));
-				visitor.setMember(new Boolean(request.getParameter("member")));
-
+				Visitor visitor = insertVisitorLog(request, response);
 				VisitorDao.insertVisitor(visitor);
-				response.getWriter().append("Successfully inserted the details");
+				return;
+			}
+			
+			if (method.equalsIgnoreCase("insertLog")) {
+				insertVisitorLog(request, response);
 				return;
 			}
 			
 			if(method.equalsIgnoreCase("list")){
 				List<Visitor> existingVisitors = VisitorDao.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
+			//	List<Visitor> existingVisitors = Arrays.asList(new Visitor("j","ravi","123", false), new Visitor("r","ravi","123",false));
+			//List<Visitor> existingVisitors = new ArrayList<Visitor>();
 				Gson gson = new Gson();
-				response.setContentType("text/x-json;charset=UTF-8");           
-		        response.setHeader("Cache-Control", "no-cache");
-				response.getWriter().append(gson.toJson(existingVisitors));
+				
+		        if(existingVisitors.size() == 1){
+		        	response.getWriter().append("Logged user");
+		        	VisitorDao.insertVisitorLog(existingVisitors.get(0));
+		        }
+		        else {
+		        	response.setContentType("text/x-json;charset=UTF-8");           
+			        response.setHeader("Cache-Control", "no-cache");
+		        	response.getWriter().append(gson.toJson(existingVisitors));
+		        }
 				return;
 			}
 			
@@ -69,6 +79,18 @@ public class VisitorController extends HttpServlet {
 			e.printStackTrace(response.getWriter());
 		}
 
+	}
+
+	private Visitor insertVisitorLog(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, URISyntaxException, IOException {
+		Visitor visitor = new Visitor();
+		visitor.setPhoneNumber(request.getParameter("phoneNumber"));
+		visitor.setFirstName(request.getParameter("firstName"));
+		visitor.setLastName(request.getParameter("lastName"));
+		visitor.setMember(new Boolean(request.getParameter("member")));
+		VisitorDao.insertVisitorLog(visitor);
+		response.getWriter().append("Successfully inserted the details");
+		return visitor;
 	}
 
 	/**
