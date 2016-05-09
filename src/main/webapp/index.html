@@ -34,7 +34,7 @@
     
     function signup() {
 
-    	$.ajax({url: "welcome?method=insert&phoneNumber="+$('#phoneNumber').val()+"&firstName="+$('#firstName').val()+"&lastName="+$('#lastName').val()+ "&member="+$('#member').val(), success: function(result){
+    	$.ajax({url: "welcome?method=insert&phoneNumber="+$('#form-phoneNumber').val()+"&firstName="+$('#form-firstName').val()+"&lastName="+$('#form-lastName').val()+ "&member="+$('#form-member').val(), success: function(result){
     		$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
     		$("#signup")[0].reset();
     		$('#modal-login').modal('hide');
@@ -87,6 +87,14 @@
 		return false;
 	}
 </script>
+<style>
+a, a:active, a:visited { color: white; }
+
+a:hover {
+  color: yellow ;
+  background-color: #def ;
+}
+</style>
 </head>
 <body>
 
@@ -102,12 +110,9 @@
 							<div class="description">
 								<p>
 									Welcome to the Bharatiya Community Library. If you are not
-									already a member, <strong>sign up here</strong>.
+									already a member, <strong><a class="btn btn-link-1 launch-modal" href="#"
+										data-modal-id="modal-login">sign up here</a></strong>.
 								</p>
-								<div class="top-big-link">
-									<a class="btn btn-link-1 launch-modal" href="#"
-										data-modal-id="modal-login">Sign Up</a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -162,19 +167,19 @@
 						<form role="form" onsubmit="return signup()" id="signup" class="login-form">
 							<div class="form-group">
 								<input type="text" name="firstName" placeholder="First Name..."
-									class="form-username form-control" id="form-username">
+									class="form-username form-control" id="form-firstName">
 							</div>
 							<div class="form-group">
 								<input type="text" name="lastName" placeholder="Last Name..."
-									class="form-username form-control" id="form-username">
+									class="form-username form-control" id="form-lastName">
 							</div>
 							<div class="form-group">
 								<input type="text" name="phoneNumber"
 									placeholder="Phone Number..."
-									class="form-username form-control" id="form-username">
+									class="form-username form-control" id="form-phoneNumber">
 							</div>
 							<div class="form-group">
-								<select class="selectpicker">
+								<select class="selectpicker" id="form-member">
   									<option value="false">Non Member</option>
   									<option value="true">Temple Member</option>
 								</select>
