@@ -34,7 +34,7 @@
     
     function signup() {
 
-    	$.ajax({url: "welcome?method=insert?phoneNumber="+$('#phoneNumber').val()+"&firstName="+$('#firstName').val()+"&lastName="+$('#lastName').val()+ "&member="+$('#member').val(), success: function(result){
+    	$.ajax({url: "welcome?method=insert&phoneNumber="+$('#phoneNumber').val()+"&firstName="+$('#firstName').val()+"&lastName="+$('#lastName').val()+ "&member="+$('#member').val(), success: function(result){
     		$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
     		$("#signup")[0].reset();
     		$('#modal-login').modal('hide');
@@ -45,7 +45,7 @@
     
 	function insertLog(){
 		
-		$.ajax({url: "welcome?method=insertLog?phoneNumber="+selectedUser.phoneNumber+"&firstName="+selectedUser.firstName+"&lastName="+selectedUser.lastName, success: function(result){
+		$.ajax({url: "welcome?method=insertLog&phoneNumber="+selectedUser.phoneNumber+"&firstName="+selectedUser.firstName+"&lastName="+selectedUser.lastName, success: function(result){
 			initUserTable();
 			$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
 	    }});

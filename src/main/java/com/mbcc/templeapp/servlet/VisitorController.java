@@ -25,7 +25,6 @@ public class VisitorController extends HttpServlet {
 	 */
 	public VisitorController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
