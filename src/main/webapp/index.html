@@ -46,8 +46,7 @@
 		if (validatePhoneNumber($('#form-phoneNumber').val())) {
 			var name = $('#form-firstName').val() + " "
 					+ $('#form-lastName').val()
-			$
-					.ajax({
+			$.ajax({
 						url : "welcome?method=insert&phoneNumber="
 								+ $('#form-phoneNumber').val() + "&firstName="
 								+ $('#form-firstName').val() + "&lastName="
@@ -70,8 +69,7 @@
 
 	function insertLog() {
 
-		$
-				.ajax({
+		$.ajax({
 					url : "welcome?method=insertLog&phoneNumber="
 							+ selectedUser.phoneNumber + "&firstName="
 							+ selectedUser.firstName + "&lastName="
@@ -87,8 +85,7 @@
 	}
 	function getList() {
 		var phone = $("#list-phoneNumber").val();
-		$
-				.ajax({
+		$.ajax({
 					url : "welcome?method=list&phoneNumber=" + phone,
 					success : function(result) {
 						console.log(result);
@@ -153,7 +150,7 @@ a:hover {
 							Welcome to the Bharatiya Community Library. If you are not
 							already a member, <strong><a
 								class="btn btn-link-1 launch-modal" href="#"
-								data-modal-id="modal-login">sign up here</a></strong>.
+								data-modal-id="modal-login">sign up here</a></strong>
 						</p>
 					</div>
 				</div>
@@ -240,9 +237,7 @@ a:hover {
 
 		</div>
 	</div>
-	</div>
 
-	</div>
 
 
 	<!-- Javascript -->

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.mbcc.templeapp.dao.VisitorDao;
+import com.mbcc.templeapp.dao.VisitorLog;
 import com.mbcc.templeapp.dto.Visitor;
 
 /**
@@ -49,8 +50,6 @@ public class VisitorController extends HttpServlet {
 			
 			if(method.equalsIgnoreCase("list")){
 				List<Visitor> existingVisitors = VisitorDao.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
-			//	List<Visitor> existingVisitors = Arrays.asList(new Visitor("j","ravi","123", false), new Visitor("r","ravi","123",false));
-			//List<Visitor> existingVisitors = new ArrayList<Visitor>();
 				Gson gson = new Gson();
 				
 		        if(existingVisitors.size() == 1){
@@ -65,7 +64,14 @@ public class VisitorController extends HttpServlet {
 				return;
 			}
 			
-			if(method.equalsIgnoreCase("listAll")){
+			if(method.equalsIgnoreCase("listAllLogs")){
+				List<VisitorLog> allVisitorsLog = VisitorDao.retrieveAllVisitorsLog();
+				Gson gson = new Gson();
+				response.getWriter().append(gson.toJson(allVisitorsLog));
+				return;
+			}
+			
+			if(method.equalsIgnoreCase("listAllVisitors")){
 				List<Visitor> existingVisitors = VisitorDao.retrieveAllVisitors();
 				Gson gson = new Gson();
 				response.setContentType("text/x-json;charset=UTF-8");           

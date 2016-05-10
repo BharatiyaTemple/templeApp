@@ -71,9 +71,9 @@ public class VisitorDao {
 
 		while (resultSet.next()) {
 			VisitorLog visitorLog = new VisitorLog();
-			visitorLog.setFirstName(resultSet.getString(1));
-			visitorLog.setLastName(resultSet.getString(2));
-			visitorLog.setDateofvisit(resultSet.getDate(3));
+			visitorLog.setFirstName(resultSet.getString(2));
+			visitorLog.setLastName(resultSet.getString(3));
+			visitorLog.setDateofvisit(resultSet.getDate(4));
 			visitorsLog.add(visitorLog);
 		}
 		return visitorsLog;
@@ -120,8 +120,6 @@ public class VisitorDao {
 		insertStatement.setString(3, visitor.getLastName());
 		insertStatement.setBoolean(4, visitor.isMember());
 		insertStatement.executeUpdate();
-		
-		insertVisitorLog(visitor);	
 	}
 	
 	public static void insertVisitorLog(Visitor visitor) throws SQLException, URISyntaxException {
