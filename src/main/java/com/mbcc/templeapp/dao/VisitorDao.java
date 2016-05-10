@@ -107,7 +107,7 @@ public class VisitorDao {
 		String dropVisitor = "DROP TABLE IF EXISTS Visitor";
 		stmt.executeUpdate(dropVisitor);
 
-		String visitors = "CREATE TABLE Visitor " + "(id SERIAL, " + " phone VARCHAR(8),"
+		String visitors = "CREATE TABLE Visitor " + "(id SERIAL, " + " phone VARCHAR(11),"
 				+ " first VARCHAR(255), " + " last VARCHAR(255), " + " member boolean, " + " PRIMARY KEY ( id ))";
 
 		stmt.executeUpdate(visitors);

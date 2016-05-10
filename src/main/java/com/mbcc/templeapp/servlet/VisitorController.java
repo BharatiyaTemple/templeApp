@@ -88,7 +88,7 @@ public class VisitorController extends HttpServlet {
 		visitor.setLastName(request.getParameter("lastName"));
 		visitor.setMember(new Boolean(request.getParameter("member")));
 		VisitorDao.insertVisitorLog(visitor);
-		response.getWriter().append("Successfully inserted the details");
+		response.getWriter().append("Success:" + request.getParameter("firstName")+" " + request.getParameter("lastName"));
 		return visitor;
 	}
 
