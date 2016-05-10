@@ -9,6 +9,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous">
+<link href='css/rotating-card.css' rel='stylesheet' />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <!-- Optional theme -->
@@ -26,11 +27,21 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var selectedUser;
+	
+	
 	function initUserTable() {
 		var table = document.getElementById("usersTable");
 		document.getElementById("usersTableBody").innerHTML = "";
 	}
+	
+	function multiplyNode(node, count, deep) {
+	    for (var i = 0, copy; i < count - 1; i++) {
+	        copy = node.cloneNode(deep);
+	        node.parentNode.insertBefore(copy, node);
+	    }
+	}
 
+	multiplyNode(document.querySelector('.card-container'), 5, true);
 	function validatePhoneNumber(inputtxt) {
 		var phoneno = /^\d{10}$/;
 		if (inputtxt.match(phoneno)) {
@@ -91,9 +102,7 @@
 						console.log(result);
 						if (result == "Logged user") {
 							initUserTable();
-							$("#messageDisplay")
-									.html(
-											"Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
+							$("#messageDisplay").html("Thank you for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
 						} else {
 
 							if (result.length == 0) {
@@ -237,8 +246,41 @@ a:hover {
 
 		</div>
 	</div>
+	
+	<div class="col-sm-10 col-sm-offset-1" >
+         <div class="col-md-4 col-sm-6">
+	<div class="card-container" id="card-container">
+         <div class="card">
+             <div class="front">
+                 <div class="cover">
+                 </div>
 
+                 <div class="content">
+                     <div class="main">
+                         <h3 class="text-center" for="eventName">Event Name</h3>
+                         <p class="text-center" for="eventDate">Event Date</p>
+                         <p class="text-center" for="eventTime">Event Time</p>
 
+                     </div>
+                 </div>
+             </div> <!-- end front panel -->
+             <div class="back">
+                 <div class="header">
+                     <h5 class="motto">.....</h5>
+                 </div>
+                 <div class="content">
+                     <div class="main">
+                         <h4 class="text-center" for="eventName">Event Name</h4>
+                         <p class="text-center" for="eventDescription">Event Description</p>
+
+                     </div>
+                 </div>
+             </div> <!-- end back panel -->
+         </div> <!-- end card -->
+     </div> <!-- end card-container -->	
+
+</div>
+</div>
 
 	<!-- Javascript -->
 	<script src="js/jquery.backstretch.min.js"></script>

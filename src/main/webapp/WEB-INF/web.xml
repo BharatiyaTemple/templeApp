@@ -32,13 +32,13 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>templeEvents</servlet-name>
-        <servlet-class>com.mbcc.templeapp.servlet.TempleEventsServlet</servlet-class>
+        <servlet-name>templeEventsProxy</servlet-name>
+        <servlet-class>com.mbcc.templeapp.servlet.TempleEventsProxy</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>templeEvents</servlet-name>
-        <url-pattern>/TempleEvents</url-pattern>
+        <servlet-name>templeEventsProxy</servlet-name>
+        <url-pattern>/eventsProxy</url-pattern>
     </servlet-mapping>
 
 </web-app>
