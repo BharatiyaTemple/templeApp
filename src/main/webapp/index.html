@@ -6,25 +6,19 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-	crossorigin="anonymous">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link href='css/rotating-card.css' rel='stylesheet' />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-	crossorigin="anonymous">
-
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-	crossorigin="anonymous"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var selectedUser;
 	
@@ -34,15 +28,28 @@
 		document.getElementById("usersTableBody").innerHTML = "";
 	}
 	
-	function multiplyNode(node, count, deep) {
-	    for (var i = 0, copy; i < count - 1; i++) {
-	        copy = node.cloneNode(deep);
-	        node.parentNode.insertBefore(copy, node);
-	    }
+	function multiplyNode(node, deep) {
+		
+		$.ajax({url: "eventsProxy", success: function(result){
+			var resultObj = jQuery.parseJSON(result);
+			for (var i = 4, copy; i >=0; i--) {
+				
+		        copy = node.cloneNode(deep);
+		        copy.querySelector(".name").innerHTML=resultObj[i].event_name;
+		        copy.querySelector(".profession").innerHTML=resultObj[i].event_date;
+		        copy.querySelector(".img").src="http://www.troy-temple.org/" + resultObj[i].event_img;
+			    copy.querySelector(".motto").innerHTML=resultObj[i].event_venue + " <br> " + resultObj[i].event_date;
+		        copy.querySelector(".email").innerHTML="Contact emails:" + resultObj[i].event_recipient_emails;
+			    node.parentNode.insertBefore(copy, node);
+		    }
+			node.remove();
+			
+	    }});
+		
+	    
 	}
 
-	multiplyNode(document.querySelector('.card-container'), 5, true);
-	function validatePhoneNumber(inputtxt) {
+		function validatePhoneNumber(inputtxt) {
 		var phoneno = /^\d{10}$/;
 		if (inputtxt.match(phoneno)) {
 			return true;
@@ -140,6 +147,10 @@ a, a:active, a:visited {
 a:hover {
 	color: yellow;
 	background-color: #def;
+}
+
+.card .user {
+border-radius:inherit;
 }
 </style>
 </head>
@@ -247,47 +258,54 @@ a:hover {
 		</div>
 	</div>
 	
-	<div class="col-sm-10 col-sm-offset-1" >
-         <div class="col-md-4 col-sm-6">
-	<div class="card-container" id="card-container">
-         <div class="card">
-             <div class="front">
-                 <div class="cover">
-                 </div>
-
-                 <div class="content">
-                     <div class="main">
-                         <h3 class="text-center" for="eventName">Event Name</h3>
-                         <p class="text-center" for="eventDate">Event Date</p>
-                         <p class="text-center" for="eventTime">Event Time</p>
-
-                     </div>
-                 </div>
-             </div> <!-- end front panel -->
-             <div class="back">
-                 <div class="header">
-                     <h5 class="motto">.....</h5>
-                 </div>
-                 <div class="content">
-                     <div class="main">
-                         <h4 class="text-center" for="eventName">Event Name</h4>
-                         <p class="text-center" for="eventDescription">Event Description</p>
-
-                     </div>
-                 </div>
-             </div> <!-- end back panel -->
-         </div> <!-- end card -->
-     </div> <!-- end card-container -->	
-
+	<!-- flipping cards end -->
+	<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1" id="parent">
+         <div class="col-md-4 col-sm-6" id="flippingcard">
+             <div class="card-container">
+                <div class="card">
+                    <div class="front">
+                    
+                        <div class="content">
+                        
+                            <div class="main">
+                                <h5 class="name">John Marvel</h5>
+                                <p class="profession">CEO</p>
+                                
+                            </div>
+                            <div class="user">
+                     				<img class="img" src=""/>
+                 				</div>
+                        </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div class="header">
+                            <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                        </div>
+                        <div class="content">
+                     		<div class="main">
+                        	<div class="email">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</div>
+                    		</div>
+                    	</div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+        </div> <!-- end col sm 3 -->
+    <div class="space-200"></div>
 </div>
-</div>
+	<!-- flipping cards end -->
+	
 
 	<!-- Javascript -->
 	<script src="js/jquery.backstretch.min.js"></script>
 	<script src="js/scripts.js"></script>
 	<script src="js/bootbox.min.js"></script>
-
 	<script src="js/popScripts.js"></script>
+	<script>
+	multiplyNode(document.querySelector('#flippingcard'), true);
+
+	</script>
 
 </body>
 </html>
