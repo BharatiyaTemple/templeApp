@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.mbcc.templeapp.dao.VisitorDao;
+import com.mbcc.templeapp.dao.VisitorMySqlDao;
 import com.mbcc.templeapp.dao.VisitorLog;
 import com.mbcc.templeapp.dto.Visitor;
 
@@ -39,7 +39,7 @@ public class VisitorController extends HttpServlet {
 		try {
 			if (method.equalsIgnoreCase("insert")) {
 				Visitor visitor = insertVisitorLog(request, response);
-				VisitorDao.insertVisitor(visitor);
+				VisitorMySqlDao.insertVisitor(visitor);
 				return;
 			}
 			
@@ -49,12 +49,12 @@ public class VisitorController extends HttpServlet {
 			}
 			
 			if(method.equalsIgnoreCase("list")){
-				List<Visitor> existingVisitors = VisitorDao.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
+				List<Visitor> existingVisitors = VisitorMySqlDao.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
 				Gson gson = new Gson();
 				
 		        if(existingVisitors.size() == 1){
 		        	response.getWriter().append("Logged user");
-		        	VisitorDao.insertVisitorLog(existingVisitors.get(0));
+		        	VisitorMySqlDao.insertVisitorLog(existingVisitors.get(0));
 		        }
 		        else {
 		        	response.setContentType("text/x-json;charset=UTF-8");           
@@ -65,14 +65,14 @@ public class VisitorController extends HttpServlet {
 			}
 			
 			if(method.equalsIgnoreCase("listAllLogs")){
-				List<VisitorLog> allVisitorsLog = VisitorDao.retrieveAllVisitorsLog();
+				List<VisitorLog> allVisitorsLog = VisitorMySqlDao.retrieveAllVisitorsLog();
 				Gson gson = new Gson();
 				response.getWriter().append(gson.toJson(allVisitorsLog));
 				return;
 			}
 			
 			if(method.equalsIgnoreCase("listAllVisitors")){
-				List<Visitor> existingVisitors = VisitorDao.retrieveAllVisitors();
+				List<Visitor> existingVisitors = VisitorMySqlDao.retrieveAllVisitors();
 				Gson gson = new Gson();
 				response.setContentType("text/x-json;charset=UTF-8");           
 		        response.setHeader("Cache-Control", "no-cache");
@@ -93,7 +93,7 @@ public class VisitorController extends HttpServlet {
 		visitor.setFirstName(request.getParameter("firstName"));
 		visitor.setLastName(request.getParameter("lastName"));
 		visitor.setMember(new Boolean(request.getParameter("member")));
-		VisitorDao.insertVisitorLog(visitor);
+		VisitorMySqlDao.insertVisitorLog(visitor);
 		response.getWriter().append("Success:" + request.getParameter("firstName")+" " + request.getParameter("lastName"));
 		return visitor;
 	}
