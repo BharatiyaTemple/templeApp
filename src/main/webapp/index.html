@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
    <head>
+   <style>
+   #content {
+    width: 880px;
+    margin: 0 auto;
+    padding: 10px 40px 20px 40px;
+    background: #FFF;
+}
+   </style>
       <meta charset="ISO-8859-1">
       <title>Bharatiya Temple Library</title>
       <!-- Latest compiled and minified CSS -->
@@ -25,24 +33,6 @@
          function initUserTable() {
          	var table = document.getElementById("usersTable");
          	document.getElementById("usersTableBody").innerHTML = "";
-         }
-         
-         function multiplyNode(node, deep) {
-         	$.ajax({url: "eventsProxy", success: function(result){
-         		var resultObj = jQuery.parseJSON(result);
-         		for (var i = 4, copy; i >=0; i--) {
-         			
-         	        copy = node.cloneNode(deep);
-         	        copy.querySelector(".name").innerHTML=resultObj[i].event_name;
-         	        copy.querySelector(".profession").innerHTML=resultObj[i].event_date;
-         	        copy.querySelector(".img").src="http://www.troy-temple.org/" + resultObj[i].event_img;
-         		    copy.querySelector(".motto").innerHTML=resultObj[i].event_venue + " <br> " + resultObj[i].event_date;
-         	        copy.querySelector(".email").innerHTML="Contact emails:<br>" + resultObj[i].event_recipient_emails;
-         		    node.parentNode.insertBefore(copy, node);
-         	    }
-         		node.remove();
-         		
-             }});
          }
          
          	function validatePhoneNumber(inputtxt) {
@@ -71,9 +61,11 @@
          								.html(
          										"Thank you <b>"
          												+ name
-         												+ "</b> for visiting us today. There are interesting upcoming Temple events as shown below. Please check them out.");
+         												+ "</b> for visiting us today. There are interesting upcoming Temple events. Please check them out. Your page will refresh with events in a few secs");
          						$("#signup")[0].reset();
          						$('#modal-login').modal('hide');
+         						
+         						setTimeout('redirect()', 10000);
          					}
          				});
          	}
@@ -81,6 +73,9 @@
          	return false;
          }
          
+         function redirect() {
+             window.location="events.html";
+          }
          function insertLog() {
          
          	$.ajax({
@@ -136,13 +131,6 @@
          }
       </script>
       <style>
-         a, a:active, a:visited {
-         color: white;
-         }
-         a:hover {
-         color: yellow;
-         background-color: #def;
-         }
          .card .user {
          border-radius:inherit;
          }
@@ -151,9 +139,11 @@
    <body>
       <!-- Top content -->
       <div class="top-content">
-      <font color="white">
+         <div id="content">
          <div class="row">
             <div class="col-sm-8 col-sm-offset-2 text">
+            <img src="http://www.troy-temple.org/images/temple/logo_full.jpg">
+   
                <h1>
                   <strong>Bharatiya</strong> Community Library
                </h1>
@@ -193,7 +183,7 @@
                </div>
                <div id="messageDisplay"></div>
             </div>
-      </font>
+            </div>
       <!-- MODAL -->
       <div class="modal fade" id="modal-login" tabindex="-1" role="dialog"
          aria-labelledby="modal-login-label" aria-hidden="true">
@@ -237,53 +227,10 @@
       </div>
       </div>
       </div>
-      <!-- flipping cards end -->
-      <div class="container">
-      <div class="row">
-      <div class="col-sm-10 col-sm-offset-1" id="parent">
-         <div class="col-md-4 col-sm-6" id="flippingcard">
-            <div class="card-container">
-               <div class="card">
-                  <div class="front">
-                     <div class="content">
-                        <div class="main">
-                           <h5 class="name">Mobi Boot Camp Corp.</h5>
-                           <p class="profession">Where you learn, build and publish mobile apps!</p>
-                        </div>
-                        <div class="user">
-                           <img class="img" src=""/>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- end front panel -->
-                  <div class="back">
-                     <div class="header">
-                        <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
-                     </div>
-                     <div class="content">
-                        <div class="main">
-                           <div class="email">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- end back panel -->
-               </div>
-               <!-- end card -->
-            </div>
-            <!-- end card-container -->
-         </div>
-         <!-- end col sm 3 -->
-         <div class="space-200"></div>
-      </div>
-      <!-- flipping cards end -->
       <!-- Javascript -->
       <script src="js/jquery.backstretch.min.js"></script>
       <script src="js/scripts.js"></script>
       <script src="js/bootbox.min.js"></script>
       <script src="js/popScripts.js"></script>
-      <script>
-         multiplyNode(document.querySelector('#flippingcard'), true);
-         
-      </script>
    </body>
 </html>
