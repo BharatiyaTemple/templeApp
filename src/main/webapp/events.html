@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+
+
+
+    <title>Bharatiya Temple Events</title>
+    <link href="css/styleflip.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">                           
+            body { background-color: #ffe3e3} 
+        </style>
+
+
+<script>
+function multiplyNode(node, deep) {
+ 	$.ajax({url: "eventsProxy", success: function(result){
+ 		var resultObj = jQuery.parseJSON(result);
+ 		for (var i = 4, copy; i >=0; i--) {
+ 			
+ 	        copy = node.cloneNode(deep);
+ 	        copy.querySelector(".name").innerHTML=resultObj[i].event_name;
+ 	        copy.querySelector(".profession").innerHTML=resultObj[i].event_date;
+ 	        copy.querySelector(".img").src="http://www.troy-temple.org/" + resultObj[i].event_img;
+ 		    copy.querySelector(".motto").innerHTML=resultObj[i].event_venue + " <br> " + resultObj[i].event_date;
+ 	        copy.querySelector(".email").innerHTML="Contact emails:<br>" + resultObj[i].event_recipient_emails;
+ 		    node.parentNode.insertBefore(copy, node);
+ 	    }
+ 		node.remove();
+ 		
+     }});
+ }
+ 
+ </script>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row">
+       
+        <!-- Info Card with social icons -->
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-2.web.britannica.com/eb-media/10/x3910-004-8FC97878.jpg.pagespeed.ic.shMdfHY-Bt.jpg">
+            </div>
+            <div class="back">
+                <h2>Temple Events for May</h2>
+                <p><strong> Sponsor Navaratna for Dwajasthampa</strong> </p>
+                <p>When: May 14, 2016
+                    <p>
+                        <p>What time: 8 am to 12 pm</p>
+                        <p>Where: Bharatiya Temple</p>
+
+                        <p><strong> Shankara - Ramanuja Jayanthi</strong> </p>
+                        <p>When: May 11 & May 15 2016
+                            <p>
+                                <p>What time: TBA</p>
+                                <p>Where: Main Prayer Hall</p>
+
+
+                                <p><strong> Emotional Maturity - Swami Viditatmananda Saraswatiji</strong> </p>
+                                <p>When: May 17 to May 19 2016
+                                    <p>
+                                        <p>What time: 7:30 pm to 9:00 pm</p>
+                                        <p>Where: Bharatiya Temple</p>
+
+                                        <p><strong> Sri Sathya Narayan Puja </strong> </p>
+                                        <p>When: May 21, 2016
+                                            <p>
+                                                <p>What time: 7:30 pm</p>
+                                                <p>Where: Prayer Hall</p>
+
+                                                <p><strong> Bala Gokulam for Kids </strong> </p>
+                                                <p>When: Every Sunday
+                                                    <p>
+                                                        <p>What time: 4:00 pm to 5:30 pm</p>
+                                                        <p>Where: Prayer Hall</p>
+
+                                                        <p><strong> Symbolism of Hindu Gods & Rituals </strong> </p>
+                                                        <p>When: Every Wednesday until May 25th
+                                                            <p>
+                                                                <p>What time: 7:00 pm to 8:00 pm</p>
+                                                                <p>Where: Groom's Room</p>
+
+
+                                                                <p><strong> Learn Gujarati Language </strong> </p>
+                                                                <p>When: Every Sunday
+                                                                    <p>
+                                                                        <p>What time: 12:30 pm (tentative)</p>
+                                                                        <p>Where: Groom's Room</p>
+
+
+                                                                        <p><strong> Learn Gita on Sundays </strong> </p>
+                                                                        <p>When: 1:30 pm to 3:00 pm
+                                                                            <p>
+                                                                                <p>What time: 12:30 pm (tentative)</p>
+                                                                                <p>Where: Groom's Room</p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Scrolling enabled for longer content -->
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-1.web.britannica.com/eb-media/09/3909-004-E18BF421.gif">
+            </div>
+            <div class="back">
+                <h2>Temple Events for June</h2>
+                <p> To Be Announced </p>
+
+
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-2.web.britannica.com/eb-media/07/3907-004-E2946933.jpg">
+            </div>
+            <div class="back">
+                <h2>Temple Events for July</h2>
+                <p><strong> Aditya Hrudayam - Suryopasana </strong> </p>
+                <p>When: July 9th to July 11th, 2016
+                    <p>
+                        <p>What time: 7:30 pm</p>
+                        <p>Where: Original Prayer Hall</p>
+
+
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-2.web.britannica.com/eb-media/10/x3910-004-8FC97878.jpg.pagespeed.ic.shMdfHY-Bt.jpg">
+            </div>
+            <div class="back">
+                <h2>Temple Events for August</h2>
+                <p> To Be Announced </p>
+
+
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-1.web.britannica.com/eb-media/09/3909-004-E18BF421.gif">
+            </div>
+            <div class="back">
+                <h2>Temple Events for September</h2>
+                <p> To Be Announced </p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="front">
+                <img class="card-image" src="http://media-2.web.britannica.com/eb-media/07/3907-004-E2946933.jpg">
+            </div>
+            <div class="back">
+                <h2>Temple Events for October</h2>
+                <p> To Be Announced </p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <h2></h2>
+                <!-- Info Card with social icons -->
+                <div class="info-card">
+                    <div class="front">
+                        <img class="card-image" src="http://media-2.web.britannica.com/eb-media/10/x3910-004-8FC97878.jpg.pagespeed.ic.shMdfHY-Bt.jpg">
+                    </div>
+                    <div class="back">
+                        <h2>Temple Events for November</h2>
+                        <p> To Be Announced </p>
+
+                    </div>
+
+
+                </div>
+
+                <div class="info-card">
+                    <div class="front">
+                        <img class="card-image" src="http://media-1.web.britannica.com/eb-media/09/3909-004-E18BF421.gif">
+                    </div>
+                    <div class="back">
+                        <h2>Temple Events for December</h2>
+                        <p> To Be Announced </p>
+                    </div>
+                </div>
+
+<script>
+         multiplyNode(document.querySelector('#flippingcard'), true);
+         
+      </script>
+
+                </body>
+
+</html>
