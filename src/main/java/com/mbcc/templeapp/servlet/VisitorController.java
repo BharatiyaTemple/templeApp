@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.mbcc.templeapp.dao.VisitorMySqlDao;
+import com.mbcc.templeapp.dao.VisitorDao;
 import com.mbcc.templeapp.dao.VisitorLog;
 import com.mbcc.templeapp.dto.Visitor;
 
@@ -35,12 +36,19 @@ public class VisitorController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("login") == null){
+			getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+		    return;
+		}
+			
+		
 		String method = request.getParameter("method");
 
 		try {
 			if (method.equalsIgnoreCase("insert")) {
 				Visitor visitor = insertVisitorLog(request, response);
-				VisitorMySqlDao.insertVisitor(visitor);
+				VisitorDao.insertVisitor(visitor);
 				return;
 			}
 
@@ -50,13 +58,13 @@ public class VisitorController extends HttpServlet {
 			}
 
 			if (method.equalsIgnoreCase("list")) {
-				List<Visitor> existingVisitors = VisitorMySqlDao
+				List<Visitor> existingVisitors = VisitorDao
 						.retrieveVisitorsDataIfExists(request.getParameter("phoneNumber"));
 				Gson gson = new Gson();
 
 				if (existingVisitors.size() == 1) {
-					response.getWriter().append("Logged user");
-					VisitorMySqlDao.insertVisitorLog(existingVisitors.get(0));
+					response.getWriter().append("- "+ existingVisitors.get(0).getFirstName() + " "+ existingVisitors.get(0).getLastName());
+					VisitorDao.insertVisitorLog(existingVisitors.get(0));
 				} else {
 					response.setContentType("text/x-json;charset=UTF-8");
 					response.setHeader("Cache-Control", "no-cache");
@@ -66,25 +74,39 @@ public class VisitorController extends HttpServlet {
 			}
 
 			if (method.equalsIgnoreCase("listAllLogs")) {
+				response.setContentType("text/csv");
+				String filename = "\"visitorsLog"+ new Date()+".csv\"";
+				response.setHeader("Content-Disposition", "attachment; filename="+filename);
+				
 				String startDate = request.getParameter("startDate");
 				String endDate = request.getParameter("endDate");
-				List<VisitorLog> allVisitorsLog = VisitorMySqlDao.retrieveAllVisitorsLog(startDate, endDate);
-				Gson gson = new Gson();
-				response.getWriter().append(gson.toJson(allVisitorsLog));
+				List<VisitorLog> allVisitorsLog = VisitorDao.retrieveAllVisitorsLog(startDate, endDate);
+				
+				OutputStream outputStream = response.getOutputStream();
+				outputStream.write("First Name, Last Name, Date of Visit\n".getBytes());
+				for (VisitorLog visitor : allVisitorsLog) {
+					String outputResult = visitor.getFirstName() + "," + visitor.getLastName() + ","
+							+ visitor.getDateofvisit() + "\n";
+					outputStream.write(outputResult.getBytes());
+				}
+				outputStream.flush();
+				outputStream.close();
 				return;
 			}
 
 			if (method.equalsIgnoreCase("listAllVisitors")) {
 				
-				List<Visitor> existingVisitors = VisitorMySqlDao.retrieveAllVisitors();
+				List<Visitor> existingVisitors = VisitorDao.retrieveAllVisitors();
 				// Gson gson = new Gson();
 				// response.setContentType("text/x-json;charset=UTF-8");
 
 				response.setContentType("text/csv");
-				response.setHeader("Content-Disposition", "attachment; filename=\"userDirectory.csv\"");
+				String filename = "\"visitors"+ new Date()+".csv\"";
+				response.setHeader("Content-Disposition", "attachment; filename="+filename);
 				try {
 					OutputStream outputStream = response.getOutputStream();
-					//TODO hard coded header line
+					outputStream.write("First Name, Last Name, Phone Number\n".getBytes());
+
 					for (Visitor visitor : existingVisitors) {
 						String outputResult = visitor.getFirstName() + "," + visitor.getLastName() + ","
 								+ visitor.getPhoneNumber() + "\n";
@@ -112,7 +134,7 @@ public class VisitorController extends HttpServlet {
 		visitor.setFirstName(request.getParameter("firstName"));
 		visitor.setLastName(request.getParameter("lastName"));
 		visitor.setMember(new Boolean(request.getParameter("member")));
-		VisitorMySqlDao.insertVisitorLog(visitor);
+		VisitorDao.insertVisitorLog(visitor);
 		response.getWriter()
 				.append("Success:" + request.getParameter("firstName") + " " + request.getParameter("lastName"));
 		return visitor;

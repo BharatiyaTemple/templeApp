@@ -1,34 +1,40 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-	crossorigin="anonymous"></script>
-<title>Login Form</title>
-</head>
-<body bgcolor='#D0D0D0'>
-	<div align='center'>
-		<form id="loginform" action="validate" method="post">
-	</div style="font-size:40px; font-weight:bolder;">
-	Login Page
-	</div>
-	<table>
-		<tr>
-			<td><label for="loginid">Username</label></td>
-			<td><input type="text" name="uid" /></td>
-		</tr>
-		<tr>
-			<td><label for="pass">Password</label></td>
-			<td><input type="password" name="pid" /></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" value="login" /></td>
-		</tr>
-	</table>
-	</form>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="post" action="login" >
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">User name</label>
+        <input type="text" name="user" class="form-control" placeholder="User Name" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>

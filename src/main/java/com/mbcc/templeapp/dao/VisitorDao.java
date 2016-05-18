@@ -30,8 +30,8 @@ public class VisitorDao {
 
 	public static List<Visitor> retrieveVisitorsDataIfExists(String phoneNumber)
 			throws SQLException, URISyntaxException {
-		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM Visitor where phone=?");
-		retrieveVisitorsStatement.setString(1, phoneNumber);
+		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM Visitor where phone LIKE ?");
+		retrieveVisitorsStatement.setString(1, "%" +phoneNumber);
 		ArrayList<Visitor> visitors = getVisitors(retrieveVisitorsStatement);
 		return visitors;
 	}
@@ -57,7 +57,7 @@ public class VisitorDao {
 		return visitors;
 	}
 	
-	public static List<VisitorLog> retrieveAllVisitorsLog()
+	public static List<VisitorLog> retrieveAllVisitorsLog(String startDate, String endDate)
 			throws SQLException, URISyntaxException {
 		
 		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM VisitorLog");

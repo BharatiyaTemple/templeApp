@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html lang="en">
 
 <head>
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Bharatiya Temple Events</title>
 <link href="css/styleflip.css" rel="stylesheet" type="text/css" />
@@ -24,15 +23,14 @@ H2 {
 
 <style type="text/css">
 body {
-	background-color: #da6f29
+	background-color: #FE9A2E
 }
 </style>
 
 
 <script>
 	function multiplyNode(node, deep) {
-		$
-				.ajax({
+		$.ajax({
 					url : "eventsProxy",
 					success : function(result) {
 						var resultObj = jQuery.parseJSON(result);
@@ -59,49 +57,61 @@ body {
 </head>
 
 <body>
-	<div class="container">
-		<br> <a href="index.html" class="btn btn-success btn-lg"> <span
-			class="glyphicon glyphicon-home"></span> Home
-		</a>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<img src="http://www.troy-temple.org/images/temple/logo_full.jpg">
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="login"> <span
+						class="glyphicon glyphicon-home"></span> Home
+				</a></li>
+				<li class="active"><a href="events.html" class="btn">
+						<span class="glyphicon glyphicon-calendar"></span> Events
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container-fluid">
 		<div class="page-header">
 			<h2 style="color: #ffffff">Check out upcoming events at the
 				temple</h2>
 		</div>
 
-<div class="row">
-		<!-- Info Card with social icons -->
-		<div id="flippingcard">
-         <div class="col-md-2 col-sm-6 col-sm-offset-1" >
-      
-			<div class="info-card">
-				<div class="front">
-					<div class="header">
-						<div class="main">
-							<h5 class="name">Mobi Boot Camp Corp.</h5>
-							<p class="profession">Where you learn, build and publish
-								mobile apps!</p>
+		<div class="row">
+			<!-- Info Card with social icons -->
+			<div id="flippingcard">
+				<div class="col-md-2 col-lg-12 col-sm-1 col-sm-offset-1">
+
+					<div class="info-card">
+						<div class="front">
+							<div class="header">
+								<div class="main">
+									<h5 class="name">Mobi Boot Camp Corp.</h5>
+									<p class="profession">Where you learn, build and publish
+										mobile apps!</p>
+								</div>
+								<div class="user">
+									<img class="img" src="" height="250" width="250" />
+								</div>
+							</div>
 						</div>
-						<div class="user">
-							<img class="img" src="" height="250" width="250" />
-						</div>
-					</div>
-				</div>
-				<div class="back">
-					<div class="header">
-						<h5 class="motto">"To be or not to be, this is my awesome
-							motto!"</h5>
-					</div>
-					<div class="content">
-						<div class="main">
-							<div class="email">Web design, Adobe Photoshop, HTML5,
-								CSS3, Corel and many others...</div>
+						<div class="back">
+							<div class="header">
+								<h5 class="motto">"To be or not to be, this is my awesome
+									motto!"</h5>
+							</div>
+							<div class="content">
+								<div class="main">
+									<div class="email">Web design, Adobe Photoshop, HTML5,
+										CSS3, Corel and many others...</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 	<script>
 		multiplyNode(document.querySelector('#flippingcard'), true);
