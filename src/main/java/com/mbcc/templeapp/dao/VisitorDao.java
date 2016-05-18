@@ -31,38 +31,47 @@ public class VisitorDao {
 
 	public static List<Visitor> retrieveVisitorsDataIfExists(String phoneNumber)
 			throws SQLException, URISyntaxException {
-		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM Visitor where phone LIKE ?");
+		Connection connection = getConnection();
+		PreparedStatement retrieveVisitorsStatement = connection.prepareStatement("SELECT * FROM Visitor where phone LIKE ?");
 		retrieveVisitorsStatement.setString(1, "%" +phoneNumber);
 		ArrayList<Visitor> visitors = getVisitors(retrieveVisitorsStatement);
+		retrieveVisitorsStatement.close();
+		connection.close();
 		return visitors;
 	}
 	
 	public static List<VisitorLog> retrieveVisitorsDataForDateRange(Date from, Date to)
 			throws SQLException, URISyntaxException {
 		
-		
-		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM VisitorLog where dateofvisit BETWEEN ? AND ?");
+		Connection connection = getConnection();
+		PreparedStatement retrieveVisitorsStatement = connection.prepareStatement("SELECT * FROM VisitorLog where dateofvisit BETWEEN ? AND ?");
 		retrieveVisitorsStatement.setTimestamp(1, new Timestamp(from.getTime()));
 		retrieveVisitorsStatement.setTimestamp(2, new Timestamp(to.getTime()));
 		
 		ArrayList<VisitorLog> visitors = getVisitorsLog(retrieveVisitorsStatement);
+		retrieveVisitorsStatement.close();
+		connection.close();
 		return visitors;
 	}
 	
 	public static List<Visitor> retrieveAllVisitors()
 			throws SQLException, URISyntaxException {
-		
-		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM Visitor");
+		Connection connection = getConnection();
+		PreparedStatement retrieveVisitorsStatement = connection.prepareStatement("SELECT * FROM Visitor");
 		
 		ArrayList<Visitor> visitors = getVisitors(retrieveVisitorsStatement);
+	    retrieveVisitorsStatement.close();
+	    connection.close();
 		return visitors;
 	}
 	
 	public static List<VisitorLog> retrieveAllVisitorsLog(String startDate, String endDate)
 			throws SQLException, URISyntaxException {
-		
-		PreparedStatement retrieveVisitorsStatement = getConnection().prepareStatement("SELECT * FROM VisitorLog");
+		Connection connection = getConnection();
+		PreparedStatement retrieveVisitorsStatement = connection.prepareStatement("SELECT * FROM VisitorLog");
 		ArrayList<VisitorLog> visitorsLog = getVisitorsLog(retrieveVisitorsStatement);
+		retrieveVisitorsStatement.close();
+		connection.close();
 		return visitorsLog;
 	}
 
@@ -95,7 +104,8 @@ public class VisitorDao {
 	}
 
 	public static void initializeDatabase() throws SQLException, URISyntaxException {
-		Statement stmt = getConnection().createStatement();
+		Connection connection = getConnection();
+		Statement stmt = connection.createStatement();
 
 		String dropVisitorLog = "DROP TABLE IF EXISTS VisitorLog";
 		stmt.executeUpdate(dropVisitorLog);
@@ -112,24 +122,31 @@ public class VisitorDao {
 				+ " first VARCHAR(255), " + " last VARCHAR(255), " + " member boolean, " + " PRIMARY KEY ( id ))";
 
 		stmt.executeUpdate(visitors);
+		connection.close();
 		
 	}
 
 	public static void insertVisitor(Visitor visitor) throws SQLException, URISyntaxException {
-		PreparedStatement insertStatement = getConnection().prepareStatement("INSERT INTO Visitor(phone,first,last,member) values(?,?,?,?)");
+		Connection connection = getConnection();
+		PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Visitor(phone,first,last,member) values(?,?,?,?)");
 		insertStatement.setString(1, visitor.getPhoneNumber());
 		insertStatement.setString(2, visitor.getFirstName());
 		insertStatement.setString(3, visitor.getLastName());
 		insertStatement.setBoolean(4, visitor.isMember());
 		insertStatement.executeUpdate();
+		insertStatement.close();
+		connection.close();
 	}
 	
 	public static void insertVisitorLog(Visitor visitor) throws SQLException, URISyntaxException {
-		PreparedStatement insertStatement = getConnection().prepareStatement("INSERT INTO VisitorLog(first,last,dateofvisit) values(?,?,?)");
+		Connection connection = getConnection();
+		PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO VisitorLog(first,last,dateofvisit) values(?,?,?)");
 		insertStatement.setString(1, visitor.getFirstName());
 		insertStatement.setString(2, visitor.getLastName());
 		insertStatement.setTimestamp(3, new Timestamp(new Date().getTime()));
 		insertStatement.executeUpdate();
+		insertStatement.close();
+		connection.close();
 	}
 
 }
