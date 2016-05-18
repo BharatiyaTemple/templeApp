@@ -1,4 +1,4 @@
-package com.mbcc.templeapp.dao;
+package com.mbcc.templeapp.dto;
 
 import java.util.Date;
 

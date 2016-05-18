@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.mbcc.templeapp.dao.VisitorDao;
-import com.mbcc.templeapp.dao.VisitorLog;
 import com.mbcc.templeapp.dto.Visitor;
+import com.mbcc.templeapp.dto.VisitorLog;
 
 /**
  * Servlet implementation class VisitorController

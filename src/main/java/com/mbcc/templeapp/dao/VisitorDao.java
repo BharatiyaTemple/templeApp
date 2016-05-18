@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mbcc.templeapp.dto.Visitor;
+import com.mbcc.templeapp.dto.VisitorLog;
 
 public class VisitorDao {
 

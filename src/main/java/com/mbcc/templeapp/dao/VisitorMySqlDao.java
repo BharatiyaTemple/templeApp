@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mbcc.templeapp.dto.Visitor;
+import com.mbcc.templeapp.dto.VisitorLog;
 import com.newrelic.agent.deps.ch.qos.logback.core.net.SyslogOutputStream;
 
 public class VisitorMySqlDao {

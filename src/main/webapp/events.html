@@ -29,8 +29,12 @@ body {
 
 
 <script>
+	function redirect() {
+		window.location = "login";
+	}
 	function multiplyNode(node, deep) {
-		$.ajax({
+		$
+				.ajax({
 					url : "eventsProxy",
 					success : function(result) {
 						var resultObj = jQuery.parseJSON(result);
@@ -63,11 +67,11 @@ body {
 				<img src="http://www.troy-temple.org/images/temple/logo_full.jpg">
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="login"> <span
-						class="glyphicon glyphicon-home"></span> Home
+				<li><a href="login"> <span class="glyphicon glyphicon-home"></span>
+						Home
 				</a></li>
-				<li class="active"><a href="events.html" class="btn">
-						<span class="glyphicon glyphicon-calendar"></span> Events
+				<li class="active"><a href="events.html" class="btn"> <span
+						class="glyphicon glyphicon-calendar"></span> Events
 				</a></li>
 			</ul>
 		</div>
@@ -115,6 +119,8 @@ body {
 	</div>
 	<script>
 		multiplyNode(document.querySelector('#flippingcard'), true);
+
+		setTimeout('redirect()', 20000);
 	</script>
 </body>
 
