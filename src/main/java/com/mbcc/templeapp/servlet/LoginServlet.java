@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 
-		if (username.equals("bharatiyaTemple") && password.equals("MuraliKrishna123")) {
+		if (username.equals(System.getenv("username")) && password.equals(System.getenv("password"))) {
 			request.getSession().setAttribute("login", "success");
 			getServletContext().getRequestDispatcher("/WEB-INF/index.html").forward(request, response);
 			return;

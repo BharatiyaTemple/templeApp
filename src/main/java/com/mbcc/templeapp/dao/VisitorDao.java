@@ -112,6 +112,7 @@ public class VisitorDao {
 				+ " first VARCHAR(255), " + " last VARCHAR(255), " + " member boolean, " + " PRIMARY KEY ( id ))";
 
 		stmt.executeUpdate(visitors);
+		
 	}
 
 	public static void insertVisitor(Visitor visitor) throws SQLException, URISyntaxException {
