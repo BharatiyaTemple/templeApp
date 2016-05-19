@@ -54,4 +54,8 @@
 		<welcome-file>/login.html</welcome-file>
 	</welcome-file-list>
 
+	<session-config>
+		<session-timeout>480</session-timeout>
+	</session-config>
+
 </web-app>
