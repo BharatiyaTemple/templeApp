@@ -65,7 +65,7 @@ public class VisitorDao {
 		return visitors;
 	}
 	
-	public static List<VisitorLog> retrieveAllVisitorsLog(String startDate, String endDate)
+	public static List<VisitorLog> retrieveAllVisitorsLog()
 			throws SQLException, URISyntaxException {
 		Connection connection = getConnection();
 		PreparedStatement retrieveVisitorsStatement = connection.prepareStatement("SELECT * FROM VisitorLog");
@@ -115,13 +115,13 @@ public class VisitorDao {
 
 		stmt.executeUpdate(visitorLog);
 		
-		String dropVisitor = "DROP TABLE IF EXISTS Visitor";
-		stmt.executeUpdate(dropVisitor);
-
-		String visitors = "CREATE TABLE Visitor " + "(id SERIAL, " + " phone VARCHAR(11),"
-				+ " first VARCHAR(255), " + " last VARCHAR(255), " + " member boolean, " + " PRIMARY KEY ( id ))";
-
-		stmt.executeUpdate(visitors);
+//		String dropVisitor = "DROP TABLE IF EXISTS Visitor";
+//		stmt.executeUpdate(dropVisitor);
+//
+//		String visitors = "CREATE TABLE Visitor " + "(id SERIAL, " + " phone VARCHAR(11),"
+//				+ " first VARCHAR(255), " + " last VARCHAR(255), " + " member boolean, " + " PRIMARY KEY ( id ))";
+//
+//		stmt.executeUpdate(visitors);
 		connection.close();
 		
 	}

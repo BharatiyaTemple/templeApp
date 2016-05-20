@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -80,8 +81,16 @@ public class VisitorController extends HttpServlet {
 				
 				String startDate = request.getParameter("startDate");
 				String endDate = request.getParameter("endDate");
-				List<VisitorLog> allVisitorsLog = VisitorDao.retrieveAllVisitorsLog(startDate, endDate);
+				List<VisitorLog> allVisitorsLog = null;
 				
+				if(startDate == null || endDate == null){
+					allVisitorsLog = VisitorDao.retrieveAllVisitorsLog();
+				} else {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Date startDt = sdf.parse(startDate);
+					Date endDt = sdf.parse(endDate);
+					allVisitorsLog= VisitorDao.retrieveVisitorsDataForDateRange(startDt, endDt);
+				}
 				OutputStream outputStream = response.getOutputStream();
 				outputStream.write("First Name, Last Name, Date of Visit\n".getBytes());
 				for (VisitorLog visitor : allVisitorsLog) {
