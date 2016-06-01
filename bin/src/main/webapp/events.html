@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bharatiya Temple Events</title>
+<link href="css/styleflip.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<style>
+P {
+	text-align: center
+}
+
+H1 {
+	text-align: center
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<style type="text/css">
+body {
+	background-color: #FE9A2E
+}
+</style>
+
+
+<script>
+	function redirect() {
+		window.location = "login";
+	}
+	function multiplyNode(node, deep) {
+		$
+				.ajax({
+					url : "eventsProxy",
+					success : function(result) {
+						var resultObj = jQuery.parseJSON(result);
+						for (var i = 4, copy; i >= 0; i--) {
+
+							copy = node.cloneNode(deep);
+							copy.querySelector(".name").innerHTML = "<p>"
+									+ resultObj[i].event_name + "</p>";
+							copy.querySelector(".profession").innerHTML = resultObj[i].event_date;
+							copy.querySelector(".img").src = "http://www.troy-temple.org/"
+									+ resultObj[i].event_img;
+							copy.querySelector(".motto").innerHTML = resultObj[i].event_venue
+									+ " <br> " + resultObj[i].event_date;
+							copy.querySelector(".email").innerHTML = "Contact emails:<br>"
+									+ resultObj[i].event_recipient_emails;
+							node.parentNode.insertBefore(copy, node);
+						}
+						node.remove();
+
+					}
+				});
+	}
+</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<img src="http://www.troy-temple.org/images/temple/logo_full.jpg">
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="login"> <span class="glyphicon glyphicon-home"></span>
+						Home
+				</a></li>
+				<li class="active"><a href="events.html" class="btn"> <span
+						class="glyphicon glyphicon-calendar"></span> Events
+				</a></li>
+			</ul>
+			<img class="pull-right" src="img/logo.PNG" height="50px">
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="page-header">
+			<h1 style="color: #ffffff">Check out upcoming events at the
+				temple</h1>
+		</div>
+
+		<div class="row">
+			<!-- Info Card with social icons -->
+			<div id="flippingcard">
+				<div class="col-md-2 col-lg-12 col-sm-3 col-sm-offset-1">
+
+					<div class="info-card">
+						<div class="front">
+							<div class="header">
+								<div class="main">
+									<h5 class="name">Mobi Boot Camp Corp.</h5>
+									<p class="profession">Where you learn, build and publish
+										mobile apps!</p>
+								</div>
+								<div class="user">
+									<img class="img" src="" height="250" width="250" />
+								</div>
+							</div>
+						</div>
+						<div class="back">
+							<div class="header">
+								<h5 class="motto">"Tell me, I forget. Teach me, I may remember. Involve me and I learn!"</h5>
+							</div>
+							<div class="content">
+								<div class="main">
+									<div class="email">Java, Android, HTML5, CSS3, Big Data, Cloud Services,
+										and many others...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		multiplyNode(document.querySelector('#flippingcard'), true);
+
+		setTimeout('redirect()', 20000);
+	</script>
+</body>
+
+</html>

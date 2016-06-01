@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<display-name>HelloWorld Application</display-name>
+	<description>
+        This is a simple web application with a source code organization
+        based on the recommendations of the Application Developer's Guide.
+    </description>
+
+	<servlet>
+		<servlet-name>Main</servlet-name>
+		<servlet-class>com.mbcc.templeapp.servlet.VisitorController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/welcome</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DB</servlet-name>
+		<servlet-class>com.mbcc.templeapp.servlet.DBServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DB</servlet-name>
+		<url-pattern>/initDB</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>templeEventsProxy</servlet-name>
+		<servlet-class>com.mbcc.templeapp.servlet.TempleEventsProxy</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+    	</description>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.mbcc.templeapp.servlet.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>templeEventsProxy</servlet-name>
+		<url-pattern>/eventsProxy</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/login.html</welcome-file>
+	</welcome-file-list>
+
+	<session-config>
+	  	<session-timeout>480</session-timeout> 
+	</session-config> 
+
+</web-app>
