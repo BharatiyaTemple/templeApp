@@ -72,7 +72,7 @@ body {
 							$("#signup")[0].reset();
 							$('#modal-login').modal('hide');
 
-							setTimeout('redirect()', 10000);
+						setTimeout('redirect()', 10000);
 						}
 					});
 		}
@@ -95,7 +95,7 @@ body {
 						$("#messageDisplay")
 								.html(
 										"Thank you for visiting us today. Your page is being redirected to interesting temple events shortly.");
-						setTimeout('redirect()', 2000);
+					setTimeout('redirect()', 2000);
 					}
 				});
 		return false;
@@ -109,10 +109,10 @@ body {
 						console.log(result);
 						if (result.toString().startsWith("-")) {
 							initUserTable();
-							$("#messageDisplay")
+						$("#messageDisplay")
 									.html(
 											"Thank you "
-													+ result
+												+ result
 													+ " for visiting us today. Your page is being redirected to interesting temple events shortly.");
 							setTimeout('redirect()', 2000);
 						} else {
