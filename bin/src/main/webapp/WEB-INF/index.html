@@ -1,151 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-#content {
-	width: 880px;
-	margin: 0 auto;
-	padding: 10px 40px 20px 40px;
-	color: #fff;
-	background: #FE9A2E;
-}
 
-body {
-	margin-top: 60px;
-	font-size: 14px;
-	font-family: "Helvetica Nueue", Arial, Verdana, sans-serif;
-	background-color: #FE9A2E !important;
-}
-</style>
+
+<head>
 <meta charset="ISO-8859-1">
 <title>Bharatiya Temple Library</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-<link
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-	rel="stylesheet" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	var selectedUser;
 
-	function initUserTable() {
-		var table = document.getElementById("usersTable");
-		document.getElementById("usersTableBody").innerHTML = "";
-	}
+<!-- Bootstrap CSS -->
+<!-- Arpan Adding External Style Sheet for easier to follow code
+- Bootstrap Version 4 latest version
+-->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+	 integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"
+	 crossorigin="anonymous">
 
-	function validatePhoneNumber(inputtxt) {
-		var phoneno = /^\d{10}$/;
-		if (inputtxt.match(phoneno)) {
-			return true;
-		} else {
-			bootbox.alert("Please enter 10 digit valid Phone Number!");
-			return false;
-		}
-	}
-
-	function signup() {
-
-		if (validatePhoneNumber($('#form-phoneNumber').val())) {
-			var name = $('#form-firstName').val() + " "
-					+ $('#form-lastName').val()
-			$.ajax({
-						url : "welcome?method=insert&phoneNumber="
-								+ $('#form-phoneNumber').val() + "&firstName="
-								+ $('#form-firstName').val() + "&lastName="
-								+ $('#form-lastName').val() + "&member="
-								+ $('#form-member').val(),
-						success : function(result) {
-							$("#messageDisplay")
-									.html("Thank you <b>"
-													+ name
-													+ "</b> for visiting us today. There are interesting upcoming Temple events. Please check them out. Your page will refresh with events in a few secs");
-							$("#signup")[0].reset();
-							$('#modal-login').modal('hide');
-
-						setTimeout('redirect()', 10000);
-						}
-					});
-		}
-
-		return false;
-	}
-
-	function redirect() {
-		window.location = "events.html";
-	}
-	function insertLog() {
-
-		$.ajax({
-					url : "welcome?method=insertLog&phoneNumber="
-							+ selectedUser.phoneNumber + "&firstName="
-							+ selectedUser.firstName + "&lastName="
-							+ selectedUser.lastName,
-					success : function(result) {
-						initUserTable();
-						$("#messageDisplay")
-								.html(
-										"Thank you for visiting us today. Your page is being redirected to interesting temple events shortly.");
-					setTimeout('redirect()', 2000);
-					}
-				});
-		return false;
-	}
-	function getList() {
-		var phone = $("#list-phoneNumber").val();
-		$
-				.ajax({
-					url : "welcome?method=list&phoneNumber=" + phone,
-					success : function(result) {
-						console.log(result);
-						if (result.toString().startsWith("-")) {
-							initUserTable();
-						$("#messageDisplay")
-									.html(
-											"Thank you "
-												+ result
-													+ " for visiting us today. Your page is being redirected to interesting temple events shortly.");
-							setTimeout('redirect()', 2000);
-						} else {
-
-							if (result.length == 0) {
-								var phoneNumber = document
-										.getElementById("list-phoneNumber").value;
-								document.getElementById("form-phoneNumber").value = phoneNumber;
-								$('#modal-login').modal('show');
-								return;
-							}
-
-							var table = document.getElementById("usersTable");
-							document.getElementById("usersTableBody").innerHTML = "";
-							for (var i = 0; i < result.length; i++) {
-								var row = table.insertRow(0);
-								var firstNameCell = row.insertCell(0);
-								var lastNameCell = row.insertCell(1);
-								var selection = row.insertCell(2);
-								firstNameCell.innerHTML = result[i].firstName;
-								lastNameCell.innerHTML = result[i].lastName;
-								selectedUser = result[i];
-								var htmlString = "<button style='color:black' onclick='insertLog()'>Sign me in</button>";
-								selection.innerHTML = htmlString;
-							}
-						}
-					}
-				});
-
-		return false;
-	}
-</script>
+	 <!-- Old Bootsrap going to replace this with newer one soon -->
+	 <link rel="stylesheet"
+	 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- I Dont think we need This Optional theme
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"rel="stylesheet" />
+-->
+<!-- javascript -->
+<!-- dont know what this does
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+- arpan -->
+<!-- Arpan Adding External SheetJavascript Sheet for easier to follow code-->
+ <script type="text/javascript" src="js/scripts.js"></script>
 </head>
+
+
+
 <body bgcolor="#FE9A2E">
 
 	<nav class="navbar navbar-default">
@@ -256,11 +143,19 @@ body {
 					</div>
 				</div>
 			</div>
+
+
+			<!-- jQuery Bootstrap JS. -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+
 			<!-- Javascript -->
 			<script src="js/jquery.backstretch.min.js"></script>
 			<script src="js/scripts.js"></script>
 			<script src="js/bootbox.min.js"></script>
 			<script src="js/popScripts.js"></script>
-			
+
+
+
 </body>
 </html>

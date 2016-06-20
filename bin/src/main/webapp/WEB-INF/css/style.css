@@ -1,0 +1,25 @@
+
+
+
+
+/*previous code
+
+
+This is the style sheet for the index page
+
+made a small change by Switched from Internal styles to External Style Sheets
+*/
+#content {
+	width: 880px;
+	margin: 0 auto;
+	padding: 10px 40px 20px 40px;
+	color: #fff;
+	background: #FE9A2E;
+}
+
+body {
+	margin-top: 60px;
+	font-size: 14px;
+	font-family: "Helvetica Nueue", Arial, Verdana, sans-serif;
+	background-color: #FE9A2E !important;
+}
